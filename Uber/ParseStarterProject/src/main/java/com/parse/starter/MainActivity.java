@@ -26,7 +26,7 @@ import com.parse.SaveCallback;
 public class MainActivity extends AppCompatActivity {
 
   public void redirectActivity() {
-
+    // check current user is rider or driver to redirect to the corresponding activity 
     if (ParseUser.getCurrentUser().getString("riderOrDriver").equals("rider")) {
 
         Intent intent = new Intent(getApplicationContext(), RiderActivity.class);
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     } else {
 
-      Intent intent = new Intent(getApplicationContext(), ViewRequestsActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ViewRequestsActivity.class);
         startActivity(intent);
 
 
@@ -42,19 +42,19 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void getStarted(View view) {
-
+    // check the switch for both driver and rider 
     Switch userTypeSwitch = (Switch) findViewById(R.id.userTypeSwitch);
 
     Log.i("Switch value", String.valueOf(userTypeSwitch.isChecked()));
-
+    
     String userType = "rider";
-
+    // update and save the current user 
     if (userTypeSwitch.isChecked()) {
 
       userType = "driver";
 
     }
-
+   
     ParseUser.getCurrentUser().put("riderOrDriver", userType);
 
       ParseUser.getCurrentUser().saveInBackground(new SaveCallback() {
@@ -66,9 +66,6 @@ public class MainActivity extends AppCompatActivity {
           }
       });
 
-
-
-
   }
 
   @Override
@@ -78,10 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
     getSupportActionBar().hide();
 
-
-
     if (ParseUser.getCurrentUser() == null) {
-
+      // Anonymous uitlity of the parse server 
       ParseAnonymousUtils.logIn(new LogInCallback() {
         @Override
         public void done(ParseUser user, ParseException e) {
@@ -96,12 +91,11 @@ public class MainActivity extends AppCompatActivity {
 
           }
 
-
         }
       });
 
     } else {
-
+      // display the log for redirecting activity fo rider or driver 
       if (ParseUser.getCurrentUser().get("riderOrDriver") != null) {
 
         Log.i("Info", "Redirecting as " + ParseUser.getCurrentUser().get("riderOrDriver"));
