@@ -22,7 +22,6 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-
 public class MainActivity extends AppCompatActivity {
 
   public void redirectActivity() {
@@ -36,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), ViewRequestsActivity.class);
         startActivity(intent);
-
-
+      
     }
   }
 
